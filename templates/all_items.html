@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title> Items Page </title>
+	</head>
+	<body>
+		<ul>
+		{% for item in l %}
+			<li> <a href = "/items/{{item['id']}}"> {{item['naziv']}} </a> </li>
+		{% endfor %}
+		</ul>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title> Users Page </title>
+	</head>
+	<body>
+		{% for user in users %}
+			{{user['ime']}} 
+			<form action = '/brisanje_korisnika' method = 'POST'>
+				<input type = 'text' value = '{{user["_id"]}}' name = 'user_id' hidden />
+				<input class="button2" type = 'submit' value = 'Obrisi korisnika' />
+			</form>
+			<br>
+		{%endfor%}
+		<style type="text/css">
+		.button2 {
+		-webkit-transition-duration: 0.4s; 
+  		transition-duration: 0.4s;
+		border-radius: 5px;
+		background-color: red;
+		color: black;
+		}
+		.button2:hover {
+		background-color: tomato;
+		color: white;
+		}
+		</style>
+	</body>
+</html>

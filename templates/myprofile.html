@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title> Profile Page </title>
+	</head>
+	<body>
+		{% if user.type == 'buyer' %}
+			<b>Ime: </b>{{user['ime']}} </br>
+			<b>Prezime:</b> {{user['prezime']}} </br>
+			<b>Broj kartice:</b> {{user['broj kartice']}} </br>
+			<b>Email:</b> {{user['email']}} </br>
+			<b>Adresa:</b> {{user['adresa']}} </br> </br>
+			<b>Novac:</b> {{user['pare']}}v$<br><br>
+
+			<form action = '/dodaj_pare' method = 'POST'>
+				<input class="button1" type = 'submit' value = 'Dodaj pare!' />
+			</form>
+
+			<table class="tt">
+			<tr class="red">
+				<td>Ime prodavca</td>
+				<td>Ime itema</td>
+				<td>Ukupna cena</td>
+			</tr>
+			{%for i in lista%}
+			
+			<tr>
+				<td>{{i['seller_ime']}}</td>
+				<td>{{i['item_ime']}}</td>
+				<td>{{i['cena']}}</td>
+			</tr>
+			{%endfor%}
+			</table>
+		{% endif %}
+
+		{% if items %}
+			<ol>
+			{% for item in items %}
+				<li> <a href = "/items/{{item['_id']}}"> {{item['name']}} </a> </li>
+			{% endfor %}
+			</ol>
+		{% endif %}
+
+		{% if user.type == 'seler' %}
+			</br>
+			</br>
+			</br>
+			Dodaj novi item </br>
+			<form action = '/additem' method = 'POST' enctype = 'multipart/form-data'> 
+				Naziv: <input type = 'text' name = 'name' /> </br>
+				Opis: <input type = 'text' name = 'desc' /> </br>
+				Cena: <input type = 'number' name = 'price' /></br>
+				Kolicina: <input type = 'number' name = 'qtt' /> </br>
+				Slika:	<input type = 'file' name = 'slika' />
+				<input type = 'submit' value = 'Add item!' /> </br>
+			</form>
+		{% endif %}
+
+		<style type="text/css">
+		.tt{
+			border: 1px solid black;
+		}
+		.tt td,tr{
+			border: 1px solid black;
+		}
+		.red{
+			background-color: lightblue; 
+		}
+		.button1 {
+			-webkit-transition-duration: 0.4s; 
+  			transition-duration: 0.4s;
+			border-radius: 5px;
+		  	background-color: blue;
+		  	color: black;
+		}
+		.button1:hover {
+			background-color: royalblue;
+		  	color: white;
+		}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title> Sellers Page </title>
+	</head>
+	<body>
+		{% for seller in sellers %}
+			<a href = "/sellers/{{seller['_id']}}"> {{seller['ime']}} </a> </br>
+		{% endfor %}
+	</body>
+</html>

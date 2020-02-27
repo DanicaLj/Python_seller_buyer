@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title> Items Page </title>
+	</head>
+	<body>
+		{% if items %}
+			<ol>
+			{% for item in items %}
+				<li> <a href = "/items/{{item['_id']}}"> {{item['name']}} </a> </li>
+			{% endfor %}
+			</ol>
+		{% endif %}
+	</body>
+</html>

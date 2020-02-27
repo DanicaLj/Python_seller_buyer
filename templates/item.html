@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title> Item Page </title>
+	</head>
+	<body>
+		<div class="glavni">
+			<div class="levo">
+				<h3> {{item['name']}} </h3>
+				<h5> <a href = '/sellers/{{item["seller_id"]}}'> {{item["seller_name"]}} </a> </h5>
+				<p> Opis: {{item['desc']}} </p>
+				<p> Price: {{item['price']}} v$</p>
+				<p> Na stanju je: {{item['qtt']}} </p>
+				<p> Posete: {{item['visits']}}</p>
+				<p> Lajkovano: {{lajkovi}}</p>
+				<p> Lajkovano od strane: {{lista_korisnika}} </p>
+
+				<form action = '/lajk' method = 'POST'>
+					<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+					<input class="button1" type = 'submit' value = 'Like!' />
+				</form>
+
+				<form action = '/kupovina' method = 'POST'>
+					<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+					<input type="text" name="kolicina">
+					<input class="button1" type = 'submit' value = 'Kupi!' />
+				</form>
+
+				{% if me.type == 'admin' %}
+					<form action = '/brisanje' method = 'POST'>
+						<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+						<input class="button2" type = 'submit' value = 'Obrisi item' />
+					</form>
+				{%endif%}
+
+				{% if me.type == 'seler' %}
+					<form action='/dodaj_kolicinu' method='POST'>
+						<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+						<input class="button1" type = 'submit' value = 'Dodaj kolicinu' />
+					</form>
+				{%endif%}
+
+				<form action = '/komentar' method = 'POST'>
+					<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+					<input type = 'text'  name = 'komentar' />
+					<input class="button2" type = 'submit' value = 'Komentarisi!' />
+				</form>
+
+				<table class="t">
+				<tr class="r">
+					<td>Ime korisnika</td>
+					<td>Komentar</td>
+					<td>Vreme</td>
+				</tr>
+				{%for i in lista_komentara%}
+				<tr>
+					<td>{{i['user_ime']}}</td>
+					<td>{{(i['komentar'])}}</td>
+					<td>{{i['vreme']}}</td>
+				</tr>		
+				{%endfor%}
+				</table>
+			</div>
+			<div class="desno">
+				<img src = "/static/img/{{item['name']}}.png" width = '200' height = '200' align="right" alt = 'Slika nije pronadjena!' />
+			</div>
+		</div>
+		<style type="text/css">
+		.t{
+			border: 1px solid black;
+		}
+		.t td,tr{
+			border: 1px solid black;
+		}
+		.r{
+			background-color: lightblue; 
+		}
+		.glavni{
+			width: 700px;
+		}
+		.levo{
+			float: left;
+			width: 300px;
+		}
+		.desno{
+			float: right;
+		}
+		.button1 {
+			-webkit-transition-duration: 0.4s; 
+  			transition-duration: 0.4s;
+			border-radius: 5px;
+		  	background-color: blue;
+		  	color: black;
+		}
+		.button1:hover {
+		 	background-color: royalblue;
+		  	color: white;
+		}
+		.button2 {
+			-webkit-transition-duration: 0.4s; 
+  			transition-duration: 0.4s;
+			border-radius: 5px;
+		  	background-color: red;
+		  	color: black;
+		}
+		.button2:hover {
+		 	background-color: tomato;
+		  	color: white;
+		}
+		</style>
+	</body>
+</html>
